@@ -34,8 +34,9 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.CargoVisit= require('./CargoVisit')(sequelize, Sequelize);
+db.CargoVisit= require('./cargoVisit')(sequelize, Sequelize);
 db.Franchise= require('./franchise')(sequelize, Sequelize);
-db.CargoRequest= require('./CargoRequest')(sequelize, Sequelize);
+db.CargoRequest= require('./cargoRequest')(sequelize, Sequelize);
+db.RegisterPromo= require('./registerPromo')(sequelize, Sequelize);
 
 module.exports = db;

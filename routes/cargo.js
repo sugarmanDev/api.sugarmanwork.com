@@ -6,7 +6,8 @@ var sequelize = require('../models').sequelize; // mysql 시퀄라이저 모델
 const {
   cargoVisit,
   cargoRequest,
-  franchise
+  franchise,
+  registerPromo
 } = require('../models');
 
 
@@ -28,6 +29,8 @@ route.post('/visit', async (ctx, next) => {
     visitTime: visitTime,
     checkYN: checkYN,
   })
+
+  ctx.body = 'd';
 
 });
 
@@ -75,8 +78,32 @@ route.post('/franchise', async (ctx, next) => {
     checkYN: checkYN,
   })
 
+  ctx.body = 'd';
+
 });
 
+route.post('/event', async (ctx, next) => {
+
+  var name = ctx.request.body.name;
+  var email = ctx.request.body.email;
+  var phone = ctx.request.body.phone;
+  var promoIdx = ctx.request.body.promoIdx;
+  var route = ctx.request.body.route;
+  var checkYN = ctx.request.body.checkYN;
+
+  var result = registerPromo.create({
+    name: name,
+    email: email,
+    phone: phone,
+    promoIdx: promoIdx,
+    route: route,
+    kind: 'cargo',
+    checkYN: checkYN,
+  })
+
+  ctx.body = 'd';
+
+});
 
 
 module.exports = route;
