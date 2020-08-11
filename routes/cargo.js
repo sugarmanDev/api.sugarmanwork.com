@@ -40,6 +40,7 @@ route.post('/request', async (ctx, next) => {
   var route = ctx.request.body.route;
   var checkYN = ctx.request.body.checkYN;
 
+  console.log(ctx.request.body);
   var result = cargoRequest.create({
     name: name,
     email: email,
@@ -48,6 +49,9 @@ route.post('/request', async (ctx, next) => {
     route: route,
     checkYN: checkYN,
   })
+
+console.log(result);
+ctx.body = 'd';
 
 });
 
