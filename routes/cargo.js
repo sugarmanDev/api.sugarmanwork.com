@@ -73,6 +73,9 @@ route.post('/request', async (ctx, next) => {
     ctx.body = { result:'success',code:'200' }
   })
 
+console.log(result);
+ctx.body = 'd';
+
 });
 
 route.post('/franchise', async (ctx, next) => {
