@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "sugarman",
+    "password": "sugarman",
+    "database": "sugarmanwork",
+    "host": "58.230.162.160",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "sugarman",
+    "password": "sugarman",
+    "database": "sugarmanwork",
+    "host": "58.230.162.160",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "sugarman",
+    "password": "sugarman",
+    "database": "sugarmanwork",
+    "host": "58.230.162.160",
+    "dialect": "mysql"
+  }
+}
