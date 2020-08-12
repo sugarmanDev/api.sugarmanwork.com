@@ -7,9 +7,29 @@ const {
   cargoVisit,
   cargoRequest,
   franchise,
-  registerPromo
+  registerPromo,
+  promo
 } = require('../models');
 
+route.get('/event', async (ctx, next) => {
+
+  var result = await promo.findAll({
+    where: {
+      site: 'cargo',
+    }
+  })
+  ctx.body = result;
+});
+
+route.get('/event/:idx', async (ctx, next) => {
+  var idx = ctx.params.idx;
+  var result = await promo.findOne({
+    where: {
+      idx: idx,
+    }
+  })
+  ctx.body = result;
+});
 
 route.post('/visit', async (ctx, next) => {
 
@@ -21,13 +41,15 @@ route.post('/visit', async (ctx, next) => {
   var visitTime = ctx.request.body.visitTime;
   var checkYN = ctx.request.body.checkYN;
 
-  var result = cargoVisit.create({
+  await cargoVisit.create({
     visitBranch: visitBranch,
     name: name,
     phone: phone,
     visitDate: visitDate,
     visitTime: visitTime,
     checkYN: checkYN,
+  }).then(function(){
+    ctx.body = { result:'success',code:'200' }
   })
 
   ctx.body = 'd';
@@ -43,14 +65,15 @@ route.post('/request', async (ctx, next) => {
   var route = ctx.request.body.route;
   var checkYN = ctx.request.body.checkYN;
 
-  console.log(ctx.request.body);
-  var result = cargoRequest.create({
+  await cargoRequest.create({
     name: name,
     email: email,
     phone: phone,
     subject: subject,
     route: route,
     checkYN: checkYN,
+  }).then(function(){
+    ctx.body = { result:'success',code:'200' }
   })
 
 console.log(result);
@@ -68,7 +91,7 @@ route.post('/franchise', async (ctx, next) => {
   var kind = ctx.request.body.kind;
   var checkYN = ctx.request.body.checkYN;
 
-  var result = franchise.create({
+  await franchise.create({
     name: name,
     email: email,
     phone: phone,
@@ -76,6 +99,8 @@ route.post('/franchise', async (ctx, next) => {
     route: route,
     kind: 'cargo',
     checkYN: checkYN,
+  }).then(function(){
+    ctx.body = { result:'success',code:'200' }
   })
 
   ctx.body = 'd';
