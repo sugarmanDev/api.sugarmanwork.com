@@ -20,6 +20,6 @@ app.use(bodyparser({
 
 
 app.use(router.routes());
-app.listen(7070, () => {
-    console.log('heurm server is listening to port 7070');
+app.listen(80, () => {
+    console.log('heurm server is listening to port 80');
 });

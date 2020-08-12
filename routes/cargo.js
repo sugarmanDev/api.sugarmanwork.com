@@ -48,11 +48,10 @@ route.post('/visit', async (ctx, next) => {
     visitDate: visitDate,
     visitTime: visitTime,
     checkYN: checkYN,
-  }).then(function(){
-    ctx.body = { result:'success',code:'200' }
   })
 
-  ctx.body = 'd';
+  ctx.body = { result:'success',code:'200' };
+
 
 });
 
@@ -72,12 +71,10 @@ route.post('/request', async (ctx, next) => {
     subject: subject,
     route: route,
     checkYN: checkYN,
-  }).then(function(){
-    ctx.body = { result:'success',code:'200' }
   })
 
-console.log(result);
-ctx.body = 'd';
+  ctx.body = { result:'success',code:'200' };
+
 
 });
 
@@ -99,11 +96,9 @@ route.post('/franchise', async (ctx, next) => {
     route: route,
     kind: 'cargo',
     checkYN: checkYN,
-  }).then(function(){
-    ctx.body = { result:'success',code:'200' }
   })
 
-  ctx.body = 'd';
+  ctx.body = { result:'success',code:'200' };
 
 });
 
@@ -122,11 +117,10 @@ route.post('/event', async (ctx, next) => {
     phone: phone,
     promoIdx: promoIdx,
     route: route,
-    kind: 'cargo',
     checkYN: checkYN,
   })
 
-  ctx.body = 'd';
+   ctx.body = { result:'success',code:'200' };
 
 });
 
