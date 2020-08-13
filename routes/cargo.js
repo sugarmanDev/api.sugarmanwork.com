@@ -48,7 +48,7 @@ route.post('/visit', async (ctx, next) => {
     phone: phone,
     visitDate: visitDate,
     visitTime: visitTime,
-    checkYN: checkYN,
+    checkYN: 'Y',
   })
 
   ctx.body = { result:'success',code:'200' };
@@ -71,7 +71,7 @@ route.post('/request', async (ctx, next) => {
     phone: phone,
     subject: subject,
     route: route,
-    checkYN: checkYN,
+    checkYN: 'Y',
   })
 
   ctx.body = { result:'success',code:'200' };
@@ -96,7 +96,7 @@ route.post('/franchise', async (ctx, next) => {
     description: description,
     route: route,
     kind: 'cargo',
-    checkYN: checkYN,
+    checkYN: 'Y',
   })
 
   ctx.body = { result:'success',code:'200' };
@@ -118,7 +118,7 @@ route.post('/event', async (ctx, next) => {
     phone: phone,
     promoIdx: promoIdx,
     route: route,
-    checkYN: checkYN,
+    checkYN: 'Y',
   })
 
    ctx.body = { result:'success',code:'200' };
