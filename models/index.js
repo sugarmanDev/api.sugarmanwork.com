@@ -38,5 +38,6 @@ db.CargoVisit= require('./cargoVisit')(sequelize, Sequelize);
 db.Franchise= require('./franchise')(sequelize, Sequelize);
 db.CargoRequest= require('./cargoRequest')(sequelize, Sequelize);
 db.RegisterPromo= require('./registerPromo')(sequelize, Sequelize);
+db.Salk= require('./salk')(sequelize, Sequelize);
 
 module.exports = db;
