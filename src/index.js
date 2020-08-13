@@ -22,17 +22,6 @@ app.use(async (ctx, next) => {
 app.use(cors());
 app.use(logger());
 
-
-app.use(async (ctx, next) => {
-  try {
-    await next();
-  } catch (err) {
-    err.status = err.statusCode || err.status || 500;
-    ctx.body = err.message;
-    // ctx.app.emit('error', err, ctx);
-  }
-});
-
 app.use(cors());
 app.use(logger());
 app.use(bodyparser({
@@ -40,10 +29,6 @@ app.use(bodyparser({
     json: ['application/x-javascript']
   }
 }));
-
-
-
-
 
 router.use('/salk', salkRouter.routes());
 router.use('/cargo', cargoRouter.routes());
