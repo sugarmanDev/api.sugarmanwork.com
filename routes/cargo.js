@@ -16,6 +16,7 @@ route.get('/event', async (ctx, next) => {
   var result = await promo.findAll({
     where: {
       site: 'cargo',
+      displayYN:'Y'
     }
   })
   ctx.body = result;
