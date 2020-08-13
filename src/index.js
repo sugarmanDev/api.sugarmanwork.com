@@ -9,6 +9,16 @@ const router = new Router();
 const cargoRouter = require('../routes/cargo');
 const salkRouter = require('../routes/salk');
 
+app.use(async (ctx, next) => {
+ try {
+ await next();
+ } catch (err) {
+ err.status = err.statusCode || err.status || 500;
+ ctx.body = { result:'fail',code:'500', message:'invalid JSON format'};
+ // ctx.app.emit('error', err, ctx);
+ }
+});
+
 app.use(cors());
 app.use(logger());
 

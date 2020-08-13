@@ -26,7 +26,7 @@ route.post('/about', async (ctx, next) => {
     email: email,
     company: company,
     area: area,
-    phone: pnone,
+    phone: phone,
     question: question,
     checkYN: 'Y',
   })
@@ -53,7 +53,7 @@ route.post('/owner', async (ctx, next) => {
     email: email,
     company: company,
     area: area,
-    phone: pnone,
+    phone: phone,
     question: question,
     checkYN: 'Y',
   })
@@ -80,7 +80,7 @@ route.post('/realtor', async (ctx, next) => {
     email: email,
     company: company,
     area: area,
-    phone: pnone,
+    phone: phone,
     question: question,
     checkYN: 'Y',
   })
@@ -107,7 +107,7 @@ route.post('/qna', async (ctx, next) => {
     email: email,
     company: company,
     area: area,
-    phone: pnone,
+    phone: phone,
     question: question,
     checkYN: 'Y',
   })
