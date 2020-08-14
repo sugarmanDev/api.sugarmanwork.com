@@ -3,20 +3,29 @@ const Router = require('koa-router');
 const bodyparser = require('koa-body');
 const cors = require('@koa/cors');
 const logger = require('koa-logger');
+const views = require('koa-views');
+const path = require('path');
 
 const app = new Koa();
 const router = new Router();
+
+const indexRouter = require('../routes/index');
 const cargoRouter = require('../routes/cargo');
 const salkRouter = require('../routes/salk');
+const testRouter = require('../routes/test');
 
 app.use(async (ctx, next) => {
- try {
- await next();
- } catch (err) {
- err.status = err.statusCode || err.status || 500;
- ctx.body = { result:'fail',code:'500', message:'invalid JSON format'};
- // ctx.app.emit('error', err, ctx);
- }
+  try {
+    await next();
+  } catch (err) {
+    err.status = err.statusCode || err.status || 500;
+    ctx.body = {
+      result: 'fail',
+      code: '500',
+      message: 'invalid JSON format'
+    };
+    // ctx.app.emit('error', err, ctx);
+  }
 });
 
 app.use(cors());
@@ -30,10 +39,18 @@ app.use(bodyparser({
   }
 }));
 
+
+router.use('/', indexRouter.routes());
 router.use('/salk', salkRouter.routes());
 router.use('/cargo', cargoRouter.routes());
+router.use('/test', testRouter.routes());
+
+
+app.use(views(path.join(__dirname, '../views'), {
+  extension: 'ejs'
+}))
 
 app.use(router.routes());
 app.listen(80, () => {
-    console.log('heurm server is listening to port 80');
+  console.log('heurm server is listening to port 80');
 });
