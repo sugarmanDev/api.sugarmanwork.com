@@ -134,8 +134,18 @@ route.post('/package', async (ctx, next) => {
   var phone = ctx.request.body.phone;
   var company = ctx.request.body.company;
   var platform = ctx.request.body.platform;
-  var checkYN = ctx.request.body.checkYN;
+//  var checkYN = ctx.request.body.checkYN;
 
+console.log(ctx.request.body)
+console.log(ctx.request.body.area)
+console.log(ctx.request.body.name)
+console.log(ctx.request.body.email)
+console.log(ctx.request.body.phone)
+console.log(ctx.request.body.company)
+console.log(ctx.request.body.platform)
+
+
+  //
   await package.create({
     name: name,
     area: area,
@@ -143,7 +153,6 @@ route.post('/package', async (ctx, next) => {
     phone: phone,
     company: company,
     platform: platform,
-    checkYN: 'Y',
   })
 
   ctx.body = { result:'success',code:'200' };
