@@ -3,8 +3,6 @@ const Router = require('koa-router');
 const bodyparser = require('koa-body');
 const cors = require('@koa/cors');
 const logger = require('koa-logger');
-const views = require('koa-views');
-const path = require('path');
 
 const app = new Koa();
 const router = new Router();
@@ -45,12 +43,7 @@ router.use('/salk', salkRouter.routes());
 router.use('/cargo', cargoRouter.routes());
 router.use('/test', testRouter.routes());
 
-
-app.use(views(path.join(__dirname, '../views'), {
-  extension: 'ejs'
-}))
-
 app.use(router.routes());
 app.listen(80, () => {
-  console.log('heurm server is listening to port 80');
+  console.log('server is listening to port 80');
 });
