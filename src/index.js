@@ -3,7 +3,6 @@ const Router = require('koa-router');
 const bodyparser = require('koa-body');
 const cors = require('@koa/cors');
 const logger = require('koa-logger');
-const views = require('koa-views');
 const path = require('path');
 
 const app = new Koa();
