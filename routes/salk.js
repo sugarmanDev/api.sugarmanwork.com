@@ -7,8 +7,6 @@ const {
   salk
 } = require('../models');
 
-
-
 route.post('/about', async (ctx, next) => {
 
   var type = ctx.request.body.type;
@@ -31,7 +29,10 @@ route.post('/about', async (ctx, next) => {
     checkYN: 'Y',
   })
 
-  ctx.body = { result:'success',code:'200' };
+  ctx.body = {
+    result: 'success',
+    code: '200'
+  };
 
 
 });
@@ -58,8 +59,10 @@ route.post('/owner', async (ctx, next) => {
     checkYN: 'Y',
   })
 
-  ctx.body = { result:'success',code:'200' };
-
+  ctx.body = {
+    result: 'success',
+    code: '200'
+  };
 
 });
 
@@ -85,8 +88,10 @@ route.post('/realtor', async (ctx, next) => {
     checkYN: 'Y',
   })
 
-  ctx.body = { result:'success',code:'200' };
-
+  ctx.body = {
+    result: 'success',
+    code: '200'
+  };
 
 });
 
@@ -112,10 +117,11 @@ route.post('/qna', async (ctx, next) => {
     checkYN: 'Y',
   })
 
-  ctx.body = { result:'success',code:'200' };
-
+  ctx.body = {
+    result: 'success',
+    code: '200'
+  };
 
 });
-
 
 module.exports = route;

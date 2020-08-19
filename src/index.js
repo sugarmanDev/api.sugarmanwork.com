@@ -3,7 +3,6 @@ const Router = require('koa-router');
 const bodyparser = require('koa-body');
 const cors = require('@koa/cors');
 const logger = require('koa-logger');
-const path = require('path');
 
 const app = new Koa();
 const router = new Router();
@@ -46,5 +45,5 @@ router.use('/test', testRouter.routes());
 
 app.use(router.routes());
 app.listen(80, () => {
-    console.log('server is listening to port 80');
+  console.log('server is listening to port 80');
 });
