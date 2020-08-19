@@ -45,6 +45,6 @@ router.use('/cargo', cargoRouter.routes());
 router.use('/test', testRouter.routes());
 
 app.use(router.routes());
-app.listen(443, () => {
+app.listen(80, () => {
     console.log('server is listening to port 80');
 });
