@@ -34,6 +34,6 @@ router.use('/salk', salkRouter.routes());
 router.use('/cargo', cargoRouter.routes());
 
 app.use(router.routes());
-app.listen(80, () => {
-    console.log('heurm server is listening to port 80');
+app.listen(443, () => {
+    console.log('server is listening to port 80');
 });
