@@ -44,11 +44,6 @@ router.use('/salk', salkRouter.routes());
 router.use('/cargo', cargoRouter.routes());
 router.use('/test', testRouter.routes());
 
-
-app.use(views(path.join(__dirname, '../views'), {
-  extension: 'ejs'
-}))
-
 app.use(router.routes());
 app.listen(443, () => {
     console.log('server is listening to port 80');
