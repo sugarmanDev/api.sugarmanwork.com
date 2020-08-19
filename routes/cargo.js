@@ -8,7 +8,8 @@ const {
   cargoRequest,
   franchise,
   registerPromo,
-  promo
+  promo,
+  package
 } = require('../models');
 
 route.get('/event', async (ctx, next) => {
@@ -124,6 +125,32 @@ route.post('/event', async (ctx, next) => {
    ctx.body = { result:'success',code:'200' };
 
 });
+
+route.post('/package', async (ctx, next) => {
+
+  var name = ctx.request.body.name;
+  var area = ctx.request.body.area;
+  var email = ctx.request.body.email;
+  var phone = ctx.request.body.phone;
+  var company = ctx.request.body.company;
+  var platform = ctx.request.body.platform;
+  var checkYN = ctx.request.body.checkYN;
+
+  await package.create({
+    name: name,
+    area: area,
+    email: email,
+    phone: phone,
+    company: company,
+    platform: platform,
+    checkYN: 'Y',
+  })
+
+  ctx.body = { result:'success',code:'200' };
+
+
+});
+
 
 
 module.exports = route;
