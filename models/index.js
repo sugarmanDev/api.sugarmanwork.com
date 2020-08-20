@@ -41,4 +41,8 @@ db.RegisterPromo= require('./registerPromo')(sequelize, Sequelize);
 db.Salk= require('./salk')(sequelize, Sequelize);
 // db.sugarContent= require('./sugarContent')(sequelize, Sequelize);
 
+db.CargoVisit.sync({
+ force : false , // To create table if exists , so make it false
+})
+
 module.exports = db;

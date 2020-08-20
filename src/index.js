@@ -3,12 +3,11 @@ const Router = require('koa-router');
 const bodyparser = require('koa-body');
 const cors = require('@koa/cors');
 const logger = require('koa-logger');
-const path = require('path');
 
 const app = new Koa();
 const router = new Router();
 
-const indexRouter = require('../routes/index');
+// const indexRouter = require('../routes/index');
 const cargoRouter = require('../routes/cargo');
 const salkRouter = require('../routes/salk');
 const testRouter = require('../routes/test');
@@ -40,7 +39,7 @@ app.use(bodyparser({
 }));
 
 
-router.use('/', indexRouter.routes());
+// router.use('/', indexRouter.routes());
 router.use('/salk', salkRouter.routes());
 router.use('/cargo', cargoRouter.routes());
 router.use('/test', testRouter.routes());
@@ -48,5 +47,5 @@ router.use('/sugarman', sugarmanRouter.routes());
 
 app.use(router.routes());
 app.listen(80, () => {
-    console.log('server is listening to port 80');
+  console.log('server is listening to port 80');
 });

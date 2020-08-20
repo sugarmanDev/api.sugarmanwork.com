@@ -3,7 +3,7 @@ const route = new Router();
 const sendEmail = require('../lib/mail.js');
 
 route.get('/', async (ctx, next) => {
-  await ctx.render('success');
+  ctx.body = 'dddddd';
 });
 
 

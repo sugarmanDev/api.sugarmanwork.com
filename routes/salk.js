@@ -1,13 +1,11 @@
 const Router = require('koa-router');
 const route = new Router();
-const koaBody = require('koa-body');
 var sequelize = require('../models').sequelize; // mysql 시퀄라이저 모델
+const sendEmail = require('../lib/mail.js');
 
 const {
   salk
 } = require('../models');
-
-
 
 route.post('/about', async (ctx, next) => {
 
@@ -18,7 +16,6 @@ route.post('/about', async (ctx, next) => {
   var area = ctx.request.body.area;
   var phone = ctx.request.body.phone;
   var question = ctx.request.body.question;
-  var checkYN = ctx.request.body.checkYN;
 
   await salk.create({
     type: 'salk',
@@ -28,10 +25,21 @@ route.post('/about', async (ctx, next) => {
     area: area,
     phone: phone,
     question: question,
-    checkYN: 'Y',
   })
 
-  ctx.body = { result:'success',code:'200' };
+  sendEmail("[salk] salk 문의글이 등록되었습니다.",
+    '<h2 style="font-weight:400;">이름 : ' + name +
+    '<br>회사명 : ' + company +
+    '<br>이메일 : ' + email +
+    '<br>연락처 : ' + phone +
+    '<br>희망지역 : ' + area +
+    '<br>문의 내용 : ' + question +
+    '</h2>');
+
+  ctx.body = {
+    result: 'success',
+    code: '200'
+  };
 
 
 });
@@ -45,7 +53,6 @@ route.post('/owner', async (ctx, next) => {
   var area = ctx.request.body.area;
   var phone = ctx.request.body.phone;
   var question = ctx.request.body.question;
-  var checkYN = ctx.request.body.checkYN;
 
   await salk.create({
     type: '건물주',
@@ -54,12 +61,22 @@ route.post('/owner', async (ctx, next) => {
     company: company,
     area: area,
     phone: phone,
-    question: question,
-    checkYN: 'Y',
+    question: question
   })
 
-  ctx.body = { result:'success',code:'200' };
+  sendEmail("[salk] 건물주 문의글이 등록되었습니다.",
+    '<h2 style="font-weight:400;">이름 : ' + name +
+    '<br>회사명 : ' + company +
+    '<br>이메일 : ' + email +
+    '<br>연락처 : ' + phone +
+    '<br>희망지역 : ' + area +
+    '<br>문의 내용 : ' + question +
+    '</h2>');
 
+  ctx.body = {
+    result: 'success',
+    code: '200'
+  };
 
 });
 
@@ -72,7 +89,6 @@ route.post('/realtor', async (ctx, next) => {
   var area = ctx.request.body.area;
   var phone = ctx.request.body.phone;
   var question = ctx.request.body.question;
-  var checkYN = ctx.request.body.checkYN;
 
   await salk.create({
     type: '중개인',
@@ -81,12 +97,22 @@ route.post('/realtor', async (ctx, next) => {
     company: company,
     area: area,
     phone: phone,
-    question: question,
-    checkYN: 'Y',
+    question: question
   })
 
-  ctx.body = { result:'success',code:'200' };
+  sendEmail("[salk] 중개인 문의글이 등록되었습니다.",
+    '<h2 style="font-weight:400;">이름 : ' + name +
+    '<br>회사명 : ' + company +
+    '<br>이메일 : ' + email +
+    '<br>연락처 : ' + phone +
+    '<br>희망지역 : ' + area +
+    '<br>문의 내용 : ' + question +
+    '</h2>');
 
+  ctx.body = {
+    result: 'success',
+    code: '200'
+  };
 
 });
 
@@ -99,7 +125,6 @@ route.post('/qna', async (ctx, next) => {
   var area = ctx.request.body.area;
   var phone = ctx.request.body.phone;
   var question = ctx.request.body.question;
-  var checkYN = ctx.request.body.checkYN;
 
   await salk.create({
     type: 'qna',
@@ -108,14 +133,23 @@ route.post('/qna', async (ctx, next) => {
     company: company,
     area: area,
     phone: phone,
-    question: question,
-    checkYN: 'Y',
+    question: question
   })
 
-  ctx.body = { result:'success',code:'200' };
+  sendEmail("[salk] 1:1문의 글이 등록되었습니다.",
+    '<h2 style="font-weight:400;">이름 : ' + name +
+    '<br>회사명 : ' + company +
+    '<br>이메일 : ' + email +
+    '<br>연락처 : ' + phone +
+    '<br>희망지역 : ' + area +
+    '<br>문의 내용 : ' + question +
+    '</h2>');
 
+  ctx.body = {
+    result: 'success',
+    code: '200'
+  };
 
 });
-
 
 module.exports = route;

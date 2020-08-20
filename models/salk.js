@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     checkYN: {
       type: DataTypes.ENUM('Y', 'N'),
+      defaultValue: 'N',
       allowNull: true,
     },
     regDate: {
