@@ -17,8 +17,6 @@ route.post('/about', async (ctx, next) => {
   var phone = ctx.request.body.phone;
   var question = ctx.request.body.question;
 
-  sendEmail("dddddd", "ddddddd");
-
   await salk.create({
     type: 'salk',
     name: name,
@@ -28,6 +26,15 @@ route.post('/about', async (ctx, next) => {
     phone: phone,
     question: question,
   })
+
+  sendEmail("[salk] salk문의 글이 등록되었습니다.",
+    '<h2 style="font-weight:400;">이름 : ' + name +
+    '<br>회사명 : ' + company +
+    '<br>이메일 : ' + email +
+    '<br>연락처 : ' + phone +
+    '<br>희망지역 : ' + area +
+    '<br>문의 내용 : ' + question +
+    '</h2>');
 
   ctx.body = {
     result: 'success',
@@ -57,6 +64,15 @@ route.post('/owner', async (ctx, next) => {
     question: question
   })
 
+  sendEmail("[salk] 건물주문의 글이 등록되었습니다.",
+    '<h2 style="font-weight:400;">이름 : ' + name +
+    '<br>회사명 : ' + company +
+    '<br>이메일 : ' + email +
+    '<br>연락처 : ' + phone +
+    '<br>희망지역 : ' + area +
+    '<br>문의 내용 : ' + question +
+    '</h2>');
+
   ctx.body = {
     result: 'success',
     code: '200'
@@ -84,6 +100,15 @@ route.post('/realtor', async (ctx, next) => {
     question: question
   })
 
+  sendEmail("[salk] 중개인문의 글이 등록되었습니다.",
+    '<h2 style="font-weight:400;">이름 : ' + name +
+    '<br>회사명 : ' + company +
+    '<br>이메일 : ' + email +
+    '<br>연락처 : ' + phone +
+    '<br>희망지역 : ' + area +
+    '<br>문의 내용 : ' + question +
+    '</h2>');
+
   ctx.body = {
     result: 'success',
     code: '200'
@@ -110,6 +135,15 @@ route.post('/qna', async (ctx, next) => {
     phone: phone,
     question: question
   })
+
+  sendEmail("[salk] 1:1문의 글이 등록되었습니다.",
+    '<h2 style="font-weight:400;">이름 : ' + name +
+    '<br>회사명 : ' + company +
+    '<br>이메일 : ' + email +
+    '<br>연락처 : ' + phone +
+    '<br>희망지역 : ' + area +
+    '<br>문의 내용 : ' + question +
+    '</h2>');
 
   ctx.body = {
     result: 'success',
