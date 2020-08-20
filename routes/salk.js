@@ -1,7 +1,6 @@
 const Router = require('koa-router');
 const route = new Router();
 var sequelize = require('../models').sequelize; // mysql 시퀄라이저 모델
-const sendEmail = require('../lib/mail.js');
 
 const {
   salk
