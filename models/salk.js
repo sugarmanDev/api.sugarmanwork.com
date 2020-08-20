@@ -33,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
+    checkYN: {
+      type: DataTypes.ENUM('Y', 'N'),
+      defaultValue: 'N',
+      allowNull: true,
+    },
     regDate: {
       type: 'TIMESTAMP',
       allowNull: false,
