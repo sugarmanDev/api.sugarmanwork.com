@@ -7,7 +7,7 @@ const logger = require('koa-logger');
 const app = new Koa();
 const router = new Router();
 
-// const indexRouter = require('../routes/index');
+const indexRouter = require('../routes/index');
 const cargoRouter = require('../routes/cargo');
 const salkRouter = require('../routes/salk');
 const testRouter = require('../routes/test');
@@ -39,7 +39,7 @@ app.use(bodyparser({
 }));
 
 
-// router.use('/', indexRouter.routes());
+router.use('/', indexRouter.routes());
 router.use('/salk', salkRouter.routes());
 router.use('/cargo', cargoRouter.routes());
 router.use('/test', testRouter.routes());
