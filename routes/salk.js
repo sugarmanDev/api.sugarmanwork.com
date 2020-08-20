@@ -27,7 +27,7 @@ route.post('/about', async (ctx, next) => {
     question: question,
   })
 
-  sendEmail("[salk] salk문의 글이 등록되었습니다.",
+  sendEmail("[salk] salk 문의글이 등록되었습니다.",
     '<h2 style="font-weight:400;">이름 : ' + name +
     '<br>회사명 : ' + company +
     '<br>이메일 : ' + email +
@@ -64,7 +64,7 @@ route.post('/owner', async (ctx, next) => {
     question: question
   })
 
-  sendEmail("[salk] 건물주문의 글이 등록되었습니다.",
+  sendEmail("[salk] 건물주 문의글이 등록되었습니다.",
     '<h2 style="font-weight:400;">이름 : ' + name +
     '<br>회사명 : ' + company +
     '<br>이메일 : ' + email +
@@ -100,7 +100,7 @@ route.post('/realtor', async (ctx, next) => {
     question: question
   })
 
-  sendEmail("[salk] 중개인문의 글이 등록되었습니다.",
+  sendEmail("[salk] 중개인 문의글이 등록되었습니다.",
     '<h2 style="font-weight:400;">이름 : ' + name +
     '<br>회사명 : ' + company +
     '<br>이메일 : ' + email +
