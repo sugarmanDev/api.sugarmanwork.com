@@ -12,6 +12,7 @@ const indexRouter = require('../routes/index');
 const cargoRouter = require('../routes/cargo');
 const salkRouter = require('../routes/salk');
 const testRouter = require('../routes/test');
+const sugarmanRouter = require('../routes/sugarman');
 
 app.use(async (ctx, next) => {
   try {
@@ -43,6 +44,7 @@ router.use('/', indexRouter.routes());
 router.use('/salk', salkRouter.routes());
 router.use('/cargo', cargoRouter.routes());
 router.use('/test', testRouter.routes());
+router.use('/sugarman', sugarmanRouter.routes());
 
 app.use(router.routes());
 app.listen(80, () => {
