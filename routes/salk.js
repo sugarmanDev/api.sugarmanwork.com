@@ -15,6 +15,7 @@ route.post('/about', async (ctx, next) => {
   var area = ctx.request.body.area;
   var phone = ctx.request.body.phone;
   var question = ctx.request.body.question;
+  var checkYN = ctx.request.body.checkYN;
 
   await salk.create({
     type: 'salk',
@@ -23,7 +24,8 @@ route.post('/about', async (ctx, next) => {
     company: company,
     area: area,
     phone: phone,
-    question: question
+    question: question,
+    checkYN: 'N'
   })
 
   ctx.body = {
