@@ -1,7 +1,7 @@
 const Router = require('koa-router');
 const route = new Router();
-const koaBody = require('koa-body');
 var sequelize = require('../models').sequelize; // mysql 시퀄라이저 모델
+const sendEmail = require('../lib/mail.js');
 
 const {
   salk
@@ -16,7 +16,6 @@ route.post('/about', async (ctx, next) => {
   var area = ctx.request.body.area;
   var phone = ctx.request.body.phone;
   var question = ctx.request.body.question;
-  var checkYN = ctx.request.body.checkYN;
 
   await salk.create({
     type: 'salk',
@@ -25,8 +24,7 @@ route.post('/about', async (ctx, next) => {
     company: company,
     area: area,
     phone: phone,
-    question: question,
-    checkYN: 'Y',
+    question: question
   })
 
   ctx.body = {
@@ -46,7 +44,6 @@ route.post('/owner', async (ctx, next) => {
   var area = ctx.request.body.area;
   var phone = ctx.request.body.phone;
   var question = ctx.request.body.question;
-  var checkYN = ctx.request.body.checkYN;
 
   await salk.create({
     type: '건물주',
@@ -55,8 +52,7 @@ route.post('/owner', async (ctx, next) => {
     company: company,
     area: area,
     phone: phone,
-    question: question,
-    checkYN: 'Y',
+    question: question
   })
 
   ctx.body = {
@@ -75,7 +71,6 @@ route.post('/realtor', async (ctx, next) => {
   var area = ctx.request.body.area;
   var phone = ctx.request.body.phone;
   var question = ctx.request.body.question;
-  var checkYN = ctx.request.body.checkYN;
 
   await salk.create({
     type: '중개인',
@@ -84,8 +79,7 @@ route.post('/realtor', async (ctx, next) => {
     company: company,
     area: area,
     phone: phone,
-    question: question,
-    checkYN: 'Y',
+    question: question
   })
 
   ctx.body = {
@@ -104,7 +98,6 @@ route.post('/qna', async (ctx, next) => {
   var area = ctx.request.body.area;
   var phone = ctx.request.body.phone;
   var question = ctx.request.body.question;
-  var checkYN = ctx.request.body.checkYN;
 
   await salk.create({
     type: 'qna',
@@ -113,8 +106,7 @@ route.post('/qna', async (ctx, next) => {
     company: company,
     area: area,
     phone: phone,
-    question: question,
-    checkYN: 'Y',
+    question: question
   })
 
   ctx.body = {
