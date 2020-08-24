@@ -2,6 +2,7 @@ const Router = require('koa-router');
 const route = new Router();
 const koaBody = require('koa-body');
 var sequelize = require('../models').sequelize; // mysql 시퀄라이저 모델
+const sendEmail = require('../lib/mail.js');
 
 const {
   cargoVisit,
@@ -17,7 +18,7 @@ route.get('/event', async (ctx, next) => {
   var result = await promo.findAll({
     where: {
       site: 'cargo',
-      displayYN:'Y'
+      displayYN: 'Y'
     }
   })
   ctx.body = result;
@@ -49,10 +50,25 @@ route.post('/visit', async (ctx, next) => {
     phone: phone,
     visitDate: visitDate,
     visitTime: visitTime,
-    checkYN: 'Y',
+    checkYN: 'N',
   })
 
-  ctx.body = { result:'success',code:'200' };
+
+  sendEmail("[Cargo] 방문 예약이 등록되었습니다.",
+    '<h2 style="font-weight:400;">이름 : ' + name +
+    '<br>이메일 : ' + email +
+    '<br>연락처 : ' + phone +
+    // '<br>지점 : ' + visitBranch +
+    // '<br>원하는 스토리지 사이즈 : ' + storageSize +
+    // '<br>방문날짜 : ' + visitDate +
+    // '<br>방문시간 : ' + visitTime +
+    '</h2>');
+
+
+  ctx.body = {
+    result: 'success',
+    code: '200'
+  };
 
 
 });
@@ -72,10 +88,22 @@ route.post('/request', async (ctx, next) => {
     phone: phone,
     subject: subject,
     route: route,
-    checkYN: 'Y',
+    checkYN: 'N',
   })
 
-  ctx.body = { result:'success',code:'200' };
+
+  sendEmail("[Cargo] 1:1문의글이 등록되었습니다.",
+    '<h2 style="font-weight:400;">이름 : ' + name +
+    '<br>이메일 : ' + email +
+    '<br>연락처 : ' + phone +
+    '<br>문의내용 : ' + subject +
+    '</h2>');
+
+
+  ctx.body = {
+    result: 'success',
+    code: '200'
+  };
 
 
 });
@@ -97,10 +125,20 @@ route.post('/franchise', async (ctx, next) => {
     description: description,
     route: route,
     kind: 'cargo',
-    checkYN: 'Y',
+    checkYN: 'N',
   })
 
-  ctx.body = { result:'success',code:'200' };
+  sendEmail("[Cargo] 가맹 문의글이 등록되었습니다.",
+    '<h2 style="font-weight:400;">이름 : ' + name +
+    '<br>이메일 : ' + email +
+    '<br>연락처 : ' + phone +
+    '<br>문의내용 : ' + description +
+    '</h2>');
+
+  ctx.body = {
+    result: 'success',
+    code: '200'
+  };
 
 });
 
@@ -119,10 +157,13 @@ route.post('/event', async (ctx, next) => {
     phone: phone,
     promoIdx: promoIdx,
     route: route,
-    checkYN: 'Y',
+    checkYN: 'N',
   })
 
-   ctx.body = { result:'success',code:'200' };
+  ctx.body = {
+    result: 'success',
+    code: '200'
+  };
 
 });
 
@@ -134,18 +175,17 @@ route.post('/package', async (ctx, next) => {
   var phone = ctx.request.body.phone;
   var company = ctx.request.body.company;
   var platform = ctx.request.body.platform;
-//  var checkYN = ctx.request.body.checkYN;
+  //  var checkYN = ctx.request.body.checkYN;
 
-console.log(ctx.request.body)
-console.log(ctx.request.body.area)
-console.log(ctx.request.body.name)
-console.log(ctx.request.body.email)
-console.log(ctx.request.body.phone)
-console.log(ctx.request.body.company)
-console.log(ctx.request.body.platform)
+  console.log(ctx.request.body)
+  console.log(ctx.request.body.area)
+  console.log(ctx.request.body.name)
+  console.log(ctx.request.body.email)
+  console.log(ctx.request.body.phone)
+  console.log(ctx.request.body.company)
+  console.log(ctx.request.body.platform)
 
 
-  //
   await package.create({
     name: name,
     area: area,
@@ -155,7 +195,21 @@ console.log(ctx.request.body.platform)
     platform: platform,
   })
 
-  ctx.body = { result:'success',code:'200' };
+
+  sendEmail("[Cargo] 택배 문의글이 등록되었습니다.",
+    '<h2 style="font-weight:400;">이름 : ' + name +
+    '<br>이메일 : ' + email +
+    '<br>연락처 : ' + phone +
+    '<br>지역 : ' + area +
+    '<br>회사명 : ' + company +
+    '<br>플랫폼 : ' + platform +
+    '</h2>');
+
+
+  ctx.body = {
+    result: 'success',
+    code: '200'
+  };
 
 
 });
