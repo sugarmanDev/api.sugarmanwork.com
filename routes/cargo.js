@@ -40,14 +40,20 @@ route.post('/visit', async (ctx, next) => {
   var name = ctx.request.body.name;
   var email = ctx.request.body.email;
   var phone = ctx.request.body.phone;
+  var branch_desktop = ctx.request.body.branch_desktop;
+  var storageSize = ctx.request.body.storageSize;
   var visitDate = ctx.request.body.visitDate;
   var visitTime = ctx.request.body.visitTime;
   var checkYN = ctx.request.body.checkYN;
+
+  console.log(ctx.request.body);
 
   await cargoVisit.create({
     visitBranch: visitBranch,
     name: name,
     phone: phone,
+    storageSize: storageSize,
+    branch_desktop: branch_desktop,
     visitDate: visitDate,
     visitTime: visitTime,
     checkYN: 'N',
@@ -58,10 +64,10 @@ route.post('/visit', async (ctx, next) => {
     '<h2 style="font-weight:400;">이름 : ' + name +
     '<br>이메일 : ' + email +
     '<br>연락처 : ' + phone +
-    // '<br>지점 : ' + visitBranch +
-    // '<br>원하는 스토리지 사이즈 : ' + storageSize +
-    // '<br>방문날짜 : ' + visitDate +
-    // '<br>방문시간 : ' + visitTime +
+    '<br>지점 : ' + visitBranch +
+    '<br>원하는 스토리지 사이즈 : ' + storageSize +
+    '<br>방문날짜 : ' + visitDate +
+    '<br>방문시간 : ' + visitTime +
     '</h2>');
 
 
@@ -175,6 +181,7 @@ route.post('/package', async (ctx, next) => {
   var phone = ctx.request.body.phone;
   var company = ctx.request.body.company;
   var platform = ctx.request.body.platform;
+  var delivery_count = ctx.request.body.delivery_count;
   //  var checkYN = ctx.request.body.checkYN;
 
   console.log(ctx.request.body)
@@ -184,6 +191,7 @@ route.post('/package', async (ctx, next) => {
   console.log(ctx.request.body.phone)
   console.log(ctx.request.body.company)
   console.log(ctx.request.body.platform)
+  console.log(ctx.request.body.delivery_count)
 
 
   await package.create({
@@ -193,6 +201,7 @@ route.post('/package', async (ctx, next) => {
     phone: phone,
     company: company,
     platform: platform,
+    delivery_count: delivery_count,
   })
 
 
@@ -203,6 +212,7 @@ route.post('/package', async (ctx, next) => {
     '<br>지역 : ' + area +
     '<br>회사명 : ' + company +
     '<br>플랫폼 : ' + platform +
+    '<br>월 택배 건수 : ' + delivery_count +
     '</h2>');
 
 
