@@ -4,20 +4,23 @@
     "password": "sugarman",
     "database": "sugarmanwork",
     "host": "58.230.162.160",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false
   },
   "test": {
     "username": "sugarman",
     "password": "sugarman",
     "database": "sugarmanwork",
     "host": "58.230.162.160",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false
   },
   "production": {
     "username": "sugarman",
     "password": "sugarman",
     "database": "sugarmanwork",
     "host": "58.230.162.160",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false
   }
 }

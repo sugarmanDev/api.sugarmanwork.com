@@ -21,6 +21,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    visitInputstore: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    branch_desktop: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     visitDate: {
       type: DataTypes.STRING,
       allowNull: true,
