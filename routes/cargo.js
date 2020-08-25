@@ -166,6 +166,15 @@ route.post('/event', async (ctx, next) => {
     checkYN: 'N',
   })
 
+
+    sendEmail("[Cargo] 이벤트 참여글이 등록되었습니다.",
+      '<h2 style="font-weight:400;">이름 : ' + name +
+      '<br>이메일 : ' + email +
+      '<br>연락처 : ' + phone +
+      '<br>이벤트 종류 : ' + promoIdx +
+      '<br>알게된 경로 : ' + route +
+      '</h2>');
+
   ctx.body = {
     result: 'success',
     code: '200'
