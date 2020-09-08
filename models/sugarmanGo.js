@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    service: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     checkYN: {
       type: DataTypes.ENUM('Y', 'N'),
       defaultValue: 'N',

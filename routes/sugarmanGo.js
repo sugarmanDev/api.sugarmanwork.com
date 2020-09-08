@@ -16,6 +16,9 @@ route.post('/request', async (ctx, next) => {
   var company = ctx.request.body.company;
   var platform = ctx.request.body.platform;
   var delivery_count = ctx.request.body.delivery_count;
+  var service = ctx.request.body.service;
+
+  console.log(ctx.request.body);
 
   await sugarmanGo.create({
     name: name,
@@ -24,7 +27,8 @@ route.post('/request', async (ctx, next) => {
     phone: phone,
     company: company,
     platform: platform,
-    delivery_count: delivery_count
+    delivery_count: delivery_count,
+    service: service
   })
 
   sendEmail("[슈가맨고] 견적 문의글이 등록되었습니다.",
