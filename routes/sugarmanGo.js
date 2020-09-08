@@ -18,7 +18,7 @@ route.post('/request', async (ctx, next) => {
   var delivery_count = ctx.request.body.delivery_count;
   var service = ctx.request.body.service;
 
-  console.log(ctx.request.body);
+  console.log(ctx.request.body.service);
 
   await sugarmanGo.create({
     name: name,
@@ -38,6 +38,8 @@ route.post('/request', async (ctx, next) => {
     '<br>연락처 : ' + phone +
     '<br>지역 : ' + area +
     '<br>플랫폼 : ' + platform +
+    '<br>원하는 서비스 : ' + service +
+    '<br>월 택배 건수 : ' + delivery_count +
     '</h2>');
 
   ctx.body = {
