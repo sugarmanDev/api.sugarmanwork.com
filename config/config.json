@@ -1,25 +1,25 @@
 {
   "development": {
-    "username": "sugarman",
-    "password": "sugarman",
+    "username": "dbmasteruser",
+    "password": "Sugarman23#",
     "database": "sugarmanwork",
-    "host": "58.230.162.160",
+    "host": "ls-8e4e814baadfdca58459114d7bd7c6fb59d7ff55.czkoqrdafltt.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql",
     "logging": false
   },
   "test": {
-    "username": "sugarman",
-    "password": "sugarman",
+    "username": "dbmasteruser",
+    "password": "Sugarman23#",
     "database": "sugarmanwork",
-    "host": "58.230.162.160",
+    "host": "ls-8e4e814baadfdca58459114d7bd7c6fb59d7ff55.czkoqrdafltt.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql",
     "logging": false
   },
   "production": {
-    "username": "sugarman",
-    "password": "sugarman",
+    "username": "dbmasteruser",
+    "password": "Sugarman23#",
     "database": "sugarmanwork",
-    "host": "58.230.162.160",
+    "host": "ls-8e4e814baadfdca58459114d7bd7c6fb59d7ff55.czkoqrdafltt.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql",
     "logging": false
   }
