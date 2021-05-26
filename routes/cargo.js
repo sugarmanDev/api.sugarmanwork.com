@@ -86,6 +86,8 @@ route.post('/request', async (ctx, next) => {
   var phone = ctx.request.body.phone;
   var subject = ctx.request.body.subject;
   var route = ctx.request.body.route;
+  var branch = ctx.request.body.branch;
+  var storageSize = ctx.request.body.storageSize;
   var checkYN = ctx.request.body.checkYN;
 
   await cargoRequest.create({
@@ -94,16 +96,29 @@ route.post('/request', async (ctx, next) => {
     phone: phone,
     subject: subject,
     route: route,
+    branch: branch,
+    storageSize: storageSize,
     checkYN: 'N',
   })
 
-
-  sendEmail("[Cargo] 1:1문의글이 등록되었습니다.",
+  if(ctx.request.body.type == 'main'){
+	sendEmail("[Cargo] 1:1문의글이 등록되었습니다.",
+    '<h2 style="font-weight:400;">이름 : ' + name +
+    '<br>이메일 : ' + email +
+    '<br>연락처 : ' + phone +
+	'<br>문의지점 : ' + branch +
+	'<br>스토리지 사이즈 : ' + storageSize +
+    '<br>문의내용 : ' + subject +
+    '</h2>');
+  }else{
+	sendEmail("[Cargo] 1:1문의글이 등록되었습니다.",
     '<h2 style="font-weight:400;">이름 : ' + name +
     '<br>이메일 : ' + email +
     '<br>연락처 : ' + phone +
     '<br>문의내용 : ' + subject +
     '</h2>');
+  }
+  
 
 
   ctx.body = {

@@ -5,6 +5,10 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true
     },
+    branch: {
+      type: DataTypes.INTEGER(10),
+      allowNull: true,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -22,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
     route: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    storageSize: {
       type: DataTypes.STRING,
       allowNull: true,
     },
