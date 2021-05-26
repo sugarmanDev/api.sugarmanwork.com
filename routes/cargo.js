@@ -101,6 +101,7 @@ route.post('/request', async (ctx, next) => {
     checkYN: 'N',
   })
 
+  
   if(ctx.request.body.type == 'main'){
 	sendEmail("[Cargo] 1:1문의글이 등록되었습니다.",
     '<h2 style="font-weight:400;">이름 : ' + name +
