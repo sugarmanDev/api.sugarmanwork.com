@@ -105,18 +105,18 @@ route.post('/request', async (ctx, next) => {
   if(ctx.request.body.type == 'main'){
 	sendEmail("[Cargo] 1:1문의글이 등록되었습니다.",
     '<h2 style="font-weight:400;">이름 : ' + name +
-    '<br>이메일 : ' + email +
     '<br>연락처 : ' + phone +
 	'<br>문의지점 : ' + branch +
 	'<br>스토리지 사이즈 : ' + storageSize +
     '<br>문의내용 : ' + subject +
+	'<br>알게 된 경로 : ' + route +
     '</h2>');
   }else{
 	sendEmail("[Cargo] 1:1문의글이 등록되었습니다.",
     '<h2 style="font-weight:400;">이름 : ' + name +
-    '<br>이메일 : ' + email +
     '<br>연락처 : ' + phone +
     '<br>문의내용 : ' + subject +
+	'<br>알게 된 경로 : ' + route +
     '</h2>');
   }
   
