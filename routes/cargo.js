@@ -66,7 +66,7 @@ route.post("/visit", async (ctx, next) => {
             visitDate +
             "<br>방문시간 : " +
             visitTime +
-            "</h2>"
+            '<a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/visitList.php">방문예약 바로가기</a></h2>'
     );
 
     ctx.body = {
@@ -111,7 +111,7 @@ route.post("/request", async (ctx, next) => {
                 subject +
                 "<br>알게 된 경로 : " +
                 route +
-                "</h2>"
+                '<a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
         );
     } else {
         sendEmail(
