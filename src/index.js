@@ -23,7 +23,7 @@ app.use(async (ctx, next) => {
       result: "fail",
       code: "500",
       // message: 'invalid JSON format'
-      message: err,
+      message: `error: ${err}`,
     };
     // ctx.app.emit('error', err, ctx);
   }
