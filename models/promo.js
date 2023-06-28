@@ -58,6 +58,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+	branchIdx: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+    },
   },
   
   {

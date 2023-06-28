@@ -50,6 +50,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
     },
+	branchIdx: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true,
+    }
 
   }, {
 

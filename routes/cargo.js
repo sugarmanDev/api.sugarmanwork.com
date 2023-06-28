@@ -3,8 +3,36 @@ const route = new Router();
 const koaBody = require("koa-body");
 var sequelize = require("../models").sequelize; // mysql 시퀄라이저 모델
 const sendEmail = require("../lib/mail.js");
+//const sendFcm = require("../lib/sendFcm.js");
+const axios = require('axios');
 
-const { cargoVisit, cargoRequest, franchise, registerPromo, promo, package } = require("../models");
+const { cargoVisit, cargoRequest, franchise, registerPromo, promo, branchModel, package } = require("../models");
+
+async function sendFcm(to, body) {
+    const accessToken = 'AAAAeLGJy7g:APA91bEilvEhIqJRGgzcFGnKqgv4CbiTQGtk76g41I13SoeEBQRyxqXxys73QSkM7ES02p3TqL25zhsyfDrPfSRjpIvSokoDB8Dw58c_CQAcZRjVzjQMwi2ieTS17xECK2YlZrsFGfCf';
+
+    const res = await axios.post(`https://fcm.googleapis.com/fcm/send`, {
+        to: to,
+        notification: {
+            title: "슈가맨워크/카고 관리자 센터",
+            body: body
+        }
+    }, {
+        headers: {
+            Authorization: `key=${accessToken}`,
+			withCredentials: true
+        }
+    });
+
+	console.log(res.data);
+}
+
+var branchIdx = {
+	1: 99,
+	2: 100,
+	3: 101,
+	4: 102
+}
 
 route.get("/event", async (ctx, next) => {
     var result = await promo.findAll({
@@ -47,12 +75,16 @@ route.post("/visit", async (ctx, next) => {
         branch_desktop: branch_desktop,
         visitDate: visitDate,
         visitTime: visitTime,
+		branchIdx: branchIdx[ctx.request.body.branchIdx],
         checkYN: "N",
     });
 
+	const [results, metadata] = await sequelize.query(`select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${branchIdx[ctx.request.body.branchIdx]}'`);
+	sendFcm(results[0].token, `[슈가맨카고] ${results[0].branchName}에 방문예약이 등록되었습니다.`);
     sendEmail(
         "[Cargo] 방문 예약이 등록되었습니다.",
-        '<h2 style="font-weight:400;">이름 : ' +
+        //JSON.stringify(rows) + '<h2 style="font-weight:400;">이름 : ' +
+			'<h2 style="font-weight:400;">이름 : ' +
             name +
             "<br>이메일 : " +
             email +
@@ -69,6 +101,34 @@ route.post("/visit", async (ctx, next) => {
             '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/visitList.php">방문예약 바로가기</a></h2>'
     );
 
+	var result = await branchModel.findAll({
+		where: {
+			branchName: visitBranch,
+		},
+	});
+
+	/*
+	sendEmail(
+        "[Cargo] 방문 예약이 등록되었습니다.",
+        '<h2 style="font-weight:400;">이름 : ' +
+            name +
+            "<br>이메일 : " +
+            email +
+            "<br>연락처 : " +
+            phone +
+            "<br>지점 : " +
+            visitBranch +
+            "<br>원하는 스토리지 사이즈 : " +
+            storageSize +
+            "<br>방문날짜 : " +
+            visitDate +
+            "<br>방문시간 : " +
+            visitTime +
+            '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/visitList.php">방문예약 바로가기</a></h2>',
+		result[0].email
+    );
+	*/
+
     ctx.body = {
         result: "success",
         code: "200",
@@ -84,6 +144,12 @@ route.post("/request", async (ctx, next) => {
     var branch = ctx.request.body.branch;
     var storageSize = ctx.request.body.storageSize;
     var checkYN = ctx.request.body.checkYN;
+	var branches = {
+		1: '인천 부평점',
+		2: '서울 군자점',
+		3: '부천 상동점',
+		4: '안양 명학점'
+	}
 
     await cargoRequest.create({
         name: name,
@@ -93,8 +159,18 @@ route.post("/request", async (ctx, next) => {
         route: route,
         branch: branch,
         storageSize: storageSize,
+		branchIdx: branchIdx[ctx.request.body.branchIdx],
         checkYN: "N",
     });
+
+	var result = await branchModel.findAll({
+		where: {
+			branchIdx: branchIdx[branch],
+		},
+	}); 
+
+	const [results, metadata] = await sequelize.query(`select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${branchIdx[branch]}'`);
+	sendFcm(results[0].token, `[슈가맨카고] ${results[0].branchName}에 1:1문의가 등록되었습니다.`);
 
     if (ctx.request.body.type == "main") {
         sendEmail(
@@ -104,7 +180,7 @@ route.post("/request", async (ctx, next) => {
                 "<br>연락처 : " +
                 phone +
                 "<br>문의지점 : " +
-                branch +
+                branches[branch] +
                 "<br>스토리지 사이즈 : " +
                 storageSize +
                 "<br>문의내용 : " +
@@ -113,6 +189,26 @@ route.post("/request", async (ctx, next) => {
                 route +
                 '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
         );
+
+		/*
+        sendEmail(
+            "[Cargo] 1:1문의글이 등록되었습니다.",
+            '<h2 style="font-weight:400;">이름 : ' +
+                name +
+                "<br>연락처 : " +
+                phone +
+                "<br>문의지점 : " +
+                branches[branch] +
+                "<br>스토리지 사이즈 : " +
+                storageSize +
+                "<br>문의내용 : " +
+                subject +
+                "<br>알게 된 경로 : " +
+                route +
+                '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>',
+			result[0].email
+        );
+		*/
     } else {
         sendEmail(
             "[Cargo] 1:1문의글이 등록되었습니다.",
@@ -126,6 +222,22 @@ route.post("/request", async (ctx, next) => {
                 route +
                 '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
         );
+
+		/*
+        sendEmail(
+            "[Cargo] 1:1문의글이 등록되었습니다.",
+            '<h2 style="font-weight:400;">이름 : ' +
+                name +
+                "<br>연락처 : " +
+                phone +
+                "<br>문의내용 : " +
+                subject +
+                "<br>알게 된 경로 : " +
+                route +
+                '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>',
+			result[0].email
+        );
+		*/
     }
 
     ctx.body = {
@@ -189,6 +301,8 @@ route.post("/event", async (ctx, next) => {
         checkYN: "N",
     });
 
+	const [results, metadata] = await sequelize.query(`select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${ctx.request.body.branchIdx}'`);
+	sendFcm(results[0].token, `[슈가맨카고] ${ctx.request.body.title}에 새로운 신청자가 있습니다.`);
     sendEmail(
         "[Cargo] 이벤트 참여글이 등록되었습니다.",
         '<h2 style="font-weight:400;">이름 : ' +

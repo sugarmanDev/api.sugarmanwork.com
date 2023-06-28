@@ -30,9 +30,6 @@ app.use(async (ctx, next) => {
 
 app.use(cors());
 app.use(logger());
-
-app.use(cors());
-app.use(logger());
 app.use(bodyparser({
   extendTypes: {
     json: ['application/x-javascript']
@@ -48,6 +45,7 @@ router.use('/sugarman', sugarmanRouter.routes());
 router.use('/sugarmanGo', sugarmanGoRouter.routes());
 
 app.use(router.routes());
+//app.use(router.allowedMethods());
 app.listen(80, () => {
   console.log('server is listening to port 80');
 });
