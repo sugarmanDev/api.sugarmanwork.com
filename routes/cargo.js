@@ -315,6 +315,7 @@ route.post("/event", async (ctx, next) => {
   var email = ctx.request.body.email;
   var phone = ctx.request.body.phone;
   var promoIdx = ctx.request.body.promoIdx;
+  var branchIdx = ctx.request.body.branchIdx;
   var route = ctx.request.body.route;
   var checkYN = ctx.request.body.checkYN;
 
@@ -326,6 +327,14 @@ route.post("/event", async (ctx, next) => {
     route: route,
     checkYN: "N",
   });
+
+  var branches = {
+    1: "인천 부평점",
+    2: "서울 군자점",
+    3: "부천 상동점",
+    4: "안양 명학점",
+    5: "인천 갈산점",
+  };
 
   const [results, metadata] = await sequelize.query(
     `select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${ctx.request.body.branchIdx}'`
@@ -342,6 +351,8 @@ route.post("/event", async (ctx, next) => {
       email +
       "<br>연락처 : " +
       phone +
+      "<br>지점 : " +
+      branches[branchIdx] +
       "<br>이벤트 종류 : " +
       promoIdx +
       "<br>알게된 경로 : " +
