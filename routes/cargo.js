@@ -328,17 +328,14 @@ route.post("/event", async (ctx, next) => {
     checkYN: "N",
   });
 
-  var branches = {
-    100: "인천 부평점",
-    101: "서울 군자점",
-    102: "부천 상동점",
-    103: "안양 명학점",
-    104: "인천 갈산점",
-  };
-
   const [results, metadata] = await sequelize.query(
-    `select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${ctx.request.body.branchIdx}'`
+    `select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${branchIdx}'`
   );
+
+  const [promoResult, promoMetadata] = await sequelize.query(
+    `select title from promo where idx=${promoIdx}`
+  );
+
   sendFcm(
     results[0].token,
     `[슈가맨카고] ${ctx.request.body.title}에 새로운 신청자가 있습니다.`
@@ -352,9 +349,9 @@ route.post("/event", async (ctx, next) => {
       "<br>연락처 : " +
       phone +
       "<br>지점 : " +
-      branches[branchIdx] +
+      results[0].branchName +
       "<br>이벤트 종류 : " +
-      promoIdx +
+      promoResult[0].title +
       "<br>알게된 경로 : " +
       route +
       '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/promoList.php">이벤트 바로가기</a></h2>'
