@@ -329,11 +329,11 @@ route.post("/event", async (ctx, next) => {
   });
 
   var branches = {
-    1: "인천 부평점",
-    2: "서울 군자점",
-    3: "부천 상동점",
-    4: "안양 명학점",
-    5: "인천 갈산점",
+    100: "인천 부평점",
+    101: "서울 군자점",
+    102: "부천 상동점",
+    103: "안양 명학점",
+    104: "인천 갈산점",
   };
 
   const [results, metadata] = await sequelize.query(
@@ -352,7 +352,7 @@ route.post("/event", async (ctx, next) => {
       "<br>연락처 : " +
       phone +
       "<br>지점 : " +
-      branchIdx +
+      branches[branchIdx] +
       "<br>이벤트 종류 : " +
       promoIdx +
       "<br>알게된 경로 : " +
