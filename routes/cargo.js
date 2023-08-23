@@ -352,7 +352,7 @@ route.post("/event", async (ctx, next) => {
       "<br>연락처 : " +
       phone +
       "<br>지점 : " +
-      branches[branchIdx] +
+      branchIdx +
       "<br>이벤트 종류 : " +
       promoIdx +
       "<br>알게된 경로 : " +
