@@ -164,13 +164,6 @@ route.post("/request", async (ctx, next) => {
   var branch = ctx.request.body.branch;
   var storageSize = ctx.request.body.storageSize;
   var checkYN = ctx.request.body.checkYN;
-  var branches = {
-    1: "인천 부평점",
-    2: "서울 군자점",
-    3: "부천 상동점",
-    4: "안양 명학점",
-    5: "인천 갈산점",
-  };
 
   await cargoRequest.create({
     name: name,
@@ -180,18 +173,18 @@ route.post("/request", async (ctx, next) => {
     route: route,
     branch: branch,
     storageSize: storageSize,
-    branchIdx: branchIdx[ctx.request.body.branchIdx],
+    branchIdx: ctx.request.body.branchIdx,
     checkYN: "N",
   });
 
   var result = await branchModel.findAll({
     where: {
-      branchIdx: branchIdx[branch],
+      branchIdx: ctx.request.body.branchIdx,
     },
   });
 
   const [results, metadata] = await sequelize.query(
-    `select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${branchIdx[branch]}'`
+    `select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${ctx.request.body.branchIdx}'`
   );
   sendFcm(
     results[0].token,
@@ -206,7 +199,7 @@ route.post("/request", async (ctx, next) => {
         "<br>연락처 : " +
         phone +
         "<br>문의지점 : " +
-        branches[branch] +
+        results[0].branchName +
         "<br>스토리지 사이즈 : " +
         storageSize +
         "<br>문의내용 : " +
