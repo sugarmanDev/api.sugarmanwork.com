@@ -164,6 +164,13 @@ route.post("/request", async (ctx, next) => {
   var branch = ctx.request.body.branch;
   var storageSize = ctx.request.body.storageSize;
   var checkYN = ctx.request.body.checkYN;
+  var branches = {
+    1: "인천 부평점",
+    2: "서울 군자점",
+    3: "부천 상동점",
+    4: "안양 명학점",
+    5: "인천 갈산점",
+  };
 
   await cargoRequest.create({
     name: name,
@@ -191,90 +198,73 @@ route.post("/request", async (ctx, next) => {
     `[슈가맨카고] ${results[0].branchName}에 1:1문의가 등록되었습니다.`
   );
 
-  sendEmail(
-    "[Cargo] 1:1문의글이 등록되었습니다.",
-    '<h2 style="font-weight:400;">이름 : ' +
-      name +
-      "<br>연락처 : " +
-      phone +
-      "<br>문의지점 : " +
-      results[0].branchName +
-      "<br>스토리지 사이즈 : " +
-      storageSize +
-      "<br>문의내용 : " +
-      subject +
-      "<br>알게 된 경로 : " +
-      route +
-      '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
-  );
+  if (ctx.request.body.type == "main") {
+    sendEmail(
+      "[Cargo] 1:1문의글이 등록되었습니다.",
+      '<h2 style="font-weight:400;">이름 : ' +
+        name +
+        "<br>연락처 : " +
+        phone +
+        "<br>문의지점 : " +
+        branches[branch] +
+        "<br>스토리지 사이즈 : " +
+        storageSize +
+        "<br>문의내용 : " +
+        subject +
+        "<br>알게 된 경로 : " +
+        route +
+        '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
+    );
 
-  // if (ctx.request.body.type == "main") {
-  //   sendEmail(
-  //     "[Cargo] 1:1문의글이 등록되었습니다.",
-  //     '<h2 style="font-weight:400;">이름 : ' +
-  //       name +
-  //       "<br>연락처 : " +
-  //       phone +
-  //       "<br>문의지점 : " +
-  //       results[0].branchName +
-  //       "<br>스토리지 사이즈 : " +
-  //       storageSize +
-  //       "<br>문의내용 : " +
-  //       subject +
-  //       "<br>알게 된 경로 : " +
-  //       route +
-  //       '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
-  //   );
+    /*
+        sendEmail(
+            "[Cargo] 1:1문의글이 등록되었습니다.",
+            '<h2 style="font-weight:400;">이름 : ' +
+                name +
+                "<br>연락처 : " +
+                phone +
+                "<br>문의지점 : " +
+                branches[branch] +
+                "<br>스토리지 사이즈 : " +
+                storageSize +
+                "<br>문의내용 : " +
+                subject +
+                "<br>알게 된 경로 : " +
+                route +
+                '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>',
+			result[0].email
+        );
+		*/
+  } else {
+    sendEmail(
+      "[Cargo] 1:1문의글이 등록되었습니다.",
+      '<h2 style="font-weight:400;">이름 : ' +
+        name +
+        "<br>연락처 : " +
+        phone +
+        "<br>문의내용 : " +
+        subject +
+        "<br>알게 된 경로 : " +
+        route +
+        '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
+    );
 
-  //   /*
-  //       sendEmail(
-  //           "[Cargo] 1:1문의글이 등록되었습니다.",
-  //           '<h2 style="font-weight:400;">이름 : ' +
-  //               name +
-  //               "<br>연락처 : " +
-  //               phone +
-  //               "<br>문의지점 : " +
-  //               branches[branch] +
-  //               "<br>스토리지 사이즈 : " +
-  //               storageSize +
-  //               "<br>문의내용 : " +
-  //               subject +
-  //               "<br>알게 된 경로 : " +
-  //               route +
-  //               '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>',
-  // 		result[0].email
-  //       );
-  // 	*/
-  // } else {
-  //   sendEmail(
-  //     "[Cargo] 1:1문의글이 등록되었습니다.",
-  //     '<h2 style="font-weight:400;">이름 : ' +
-  //       name +
-  //       "<br>연락처 : " +
-  //       phone +
-  //       "<br>문의내용 : " +
-  //       subject +
-  //       "<br>알게 된 경로 : " +
-  //       route +
-  //       '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
-  //   );
-
-  //   /*
-  //       sendEmail(
-  //           "[Cargo] 1:1문의글이 등록되었습니다.",
-  //           '<h2 style="font-weight:400;">이름 : ' +
-  //               name +
-  //               "<br>연락처 : " +
-  //               phone +
-  //               "<br>문의내용 : " +
-  //               subject +
-  //               "<br>알게 된 경로 : " +
-  //               route +
-  //               '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>',
-  // 		result[0].email
-  //       );
-  // 	*/
-  // }
+    /*
+        sendEmail(
+            "[Cargo] 1:1문의글이 등록되었습니다.",
+            '<h2 style="font-weight:400;">이름 : ' +
+                name +
+                "<br>연락처 : " +
+                phone +
+                "<br>문의내용 : " +
+                subject +
+                "<br>알게 된 경로 : " +
+                route +
+                '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>',
+			result[0].email
+        );
+		*/
+  }
 
   ctx.body = {
     result: "success",
@@ -338,6 +328,14 @@ route.post("/event", async (ctx, next) => {
     checkYN: "N",
   });
 
+  var branches = {
+    100: "인천 부평점",
+    101: "서울 군자점",
+    102: "부천 상동점",
+    103: "안양 명학점",
+    104: "인천 갈산점",
+  };
+
   const [results, metadata] = await sequelize.query(
     `select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${ctx.request.body.branchIdx}'`
   );
@@ -354,7 +352,7 @@ route.post("/event", async (ctx, next) => {
       "<br>연락처 : " +
       phone +
       "<br>지점 : " +
-      results[0].branchName +
+      branches[branchIdx] +
       "<br>이벤트 종류 : " +
       promoIdx +
       "<br>알게된 경로 : " +
