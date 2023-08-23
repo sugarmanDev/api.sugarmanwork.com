@@ -118,7 +118,7 @@ route.post("/visit", async (ctx, next) => {
       visitDate +
       "<br>방문시간 : " +
       visitTime +
-      '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/visitList.php">방문예약 바로가기</a></h2>'
+      '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/visitList.php">방문예약 바로가기</a></h2>'
   );
 
   var result = await branchModel.findAll({
@@ -144,7 +144,7 @@ route.post("/visit", async (ctx, next) => {
             visitDate +
             "<br>방문시간 : " +
             visitTime +
-            '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/visitList.php">방문예약 바로가기</a></h2>',
+            '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/visitList.php">방문예약 바로가기</a></h2>',
 		result[0].email
     );
 	*/
@@ -213,7 +213,7 @@ route.post("/request", async (ctx, next) => {
         subject +
         "<br>알게 된 경로 : " +
         route +
-        '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
+        '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
     );
 
     /*
@@ -231,7 +231,7 @@ route.post("/request", async (ctx, next) => {
                 subject +
                 "<br>알게 된 경로 : " +
                 route +
-                '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>',
+                '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>',
 			result[0].email
         );
 		*/
@@ -246,7 +246,7 @@ route.post("/request", async (ctx, next) => {
         subject +
         "<br>알게 된 경로 : " +
         route +
-        '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
+        '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
     );
 
     /*
@@ -260,7 +260,7 @@ route.post("/request", async (ctx, next) => {
                 subject +
                 "<br>알게 된 경로 : " +
                 route +
-                '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>',
+                '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>',
 			result[0].email
         );
 		*/
@@ -301,7 +301,7 @@ route.post("/franchise", async (ctx, next) => {
       phone +
       "<br>문의내용 : " +
       description +
-      '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/franchiseList.php">가맹문의 바로가기</a></h2>'
+      '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/franchiseList.php">가맹문의 바로가기</a></h2>'
   );
 
   ctx.body = {
@@ -357,7 +357,7 @@ route.post("/event", async (ctx, next) => {
       promoIdx +
       "<br>알게된 경로 : " +
       route +
-      '<br><a style="font-size:20px;color:blue;" href="http://temp.sugarmanwork.com/admin/cargo/promoList.php">이벤트 바로가기</a></h2>'
+      '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/promoList.php">이벤트 바로가기</a></h2>'
   );
 
   ctx.body = {
