@@ -171,20 +171,13 @@ route.post("/request", async (ctx, next) => {
     phone: phone,
     subject: subject,
     route: route,
-    branch: branch,
     storageSize: storageSize,
-    branchIdx: ctx.request.body.branchIdx,
+    branch: branch,
     checkYN: "N",
   });
 
-  var result = await branchModel.findAll({
-    where: {
-      branchIdx: ctx.request.body.branchIdx,
-    },
-  });
-
   const [results, metadata] = await sequelize.query(
-    `select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${ctx.request.body.branchIdx}'`
+    `select branchName, (select token from fcmToken where email = branch.email) token from branch where branch = '${branch}'`
   );
   sendFcm(
     results[0].token,
