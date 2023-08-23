@@ -177,7 +177,7 @@ route.post("/request", async (ctx, next) => {
   });
 
   const [results, metadata] = await sequelize.query(
-    `select branchName, (select token from fcmToken where email = branch.email) token from branch where branch = '${branch}'`
+    `select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${branch}'`
   );
   sendFcm(
     results[0].token,
