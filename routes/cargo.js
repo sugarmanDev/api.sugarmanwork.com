@@ -164,6 +164,13 @@ route.post("/request", async (ctx, next) => {
   var branch = ctx.request.body.branch;
   var storageSize = ctx.request.body.storageSize;
   var checkYN = ctx.request.body.checkYN;
+  var branches = {
+    1: "인천 부평점",
+    2: "서울 군자점",
+    3: "부천 상동점",
+    4: "안양 명학점",
+    5: "인천 갈산점",
+  };
 
   await cargoRequest.create({
     name: name,
@@ -199,7 +206,7 @@ route.post("/request", async (ctx, next) => {
         "<br>연락처 : " +
         phone +
         "<br>문의지점 : " +
-        results[0].branchName +
+        branches[branch] +
         "<br>스토리지 사이즈 : " +
         storageSize +
         "<br>문의내용 : " +
@@ -321,14 +328,17 @@ route.post("/event", async (ctx, next) => {
     checkYN: "N",
   });
 
+  var branches = {
+    100: "인천 부평점",
+    101: "서울 군자점",
+    102: "부천 상동점",
+    103: "안양 명학점",
+    104: "인천 갈산점",
+  };
+
   const [results, metadata] = await sequelize.query(
-    `select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${branchIdx}'`
+    `select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${ctx.request.body.branchIdx}'`
   );
-
-  const [promoResult, promoMetadata] = await sequelize.query(
-    `select title from promo where idx=${promoIdx}`
-  );
-
   sendFcm(
     results[0].token,
     `[슈가맨카고] ${ctx.request.body.title}에 새로운 신청자가 있습니다.`
@@ -342,9 +352,9 @@ route.post("/event", async (ctx, next) => {
       "<br>연락처 : " +
       phone +
       "<br>지점 : " +
-      results[0].branchName +
+      branches[branchIdx] +
       "<br>이벤트 종류 : " +
-      promoResult[0].title +
+      promoIdx +
       "<br>알게된 경로 : " +
       route +
       '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/promoList.php">이벤트 바로가기</a></h2>'
