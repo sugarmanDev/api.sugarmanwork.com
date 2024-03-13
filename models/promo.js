@@ -58,16 +58,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-	branchIdx: {
+    branchIdx: {
       type: DataTypes.INTEGER(11),
       allowNull: true,
     },
   },
-  
-  {
 
-    // don't forget to enable timestamps!
-    timestamps: false,
-    tableName: 'promo',
-  });
+    {
+
+      // don't forget to enable timestamps!
+      timestamps: false,
+      tableName: 'promo',
+    });
 };

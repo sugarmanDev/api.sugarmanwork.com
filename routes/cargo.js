@@ -45,6 +45,8 @@ var branchIdx = {
   2: 100,
   3: 101,
   4: 102,
+  5: 103,
+  6: 106,
 };
 
 route.get("/event", async (ctx, next) => {
@@ -93,8 +95,7 @@ route.post("/visit", async (ctx, next) => {
   });
 
   const [results, metadata] = await sequelize.query(
-    `select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${
-      branchIdx[ctx.request.body.branchIdx]
+    `select branchName, (select token from fcmToken where email = branch.email) token from branch where branchIdx = '${branchIdx[ctx.request.body.branchIdx]
     }'`
   );
   sendFcm(
@@ -105,20 +106,20 @@ route.post("/visit", async (ctx, next) => {
     "[Cargo] 방문 예약이 등록되었습니다.",
     //JSON.stringify(rows) + '<h2 style="font-weight:400;">이름 : ' +
     '<h2 style="font-weight:400;">이름 : ' +
-      name +
-      "<br>이메일 : " +
-      email +
-      "<br>연락처 : " +
-      phone +
-      "<br>지점 : " +
-      visitBranch +
-      "<br>원하는 스토리지 사이즈 : " +
-      storageSize +
-      "<br>방문날짜 : " +
-      visitDate +
-      "<br>방문시간 : " +
-      visitTime +
-      '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/visitList.php">방문예약 바로가기</a></h2>'
+    name +
+    "<br>이메일 : " +
+    email +
+    "<br>연락처 : " +
+    phone +
+    "<br>지점 : " +
+    visitBranch +
+    "<br>원하는 스토리지 사이즈 : " +
+    storageSize +
+    "<br>방문날짜 : " +
+    visitDate +
+    "<br>방문시간 : " +
+    visitTime +
+    '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/visitList.php">방문예약 바로가기</a></h2>'
   );
 
   var result = await branchModel.findAll({
@@ -128,7 +129,7 @@ route.post("/visit", async (ctx, next) => {
   });
 
   /*
-	sendEmail(
+  sendEmail(
         "[Cargo] 방문 예약이 등록되었습니다.",
         '<h2 style="font-weight:400;">이름 : ' +
             name +
@@ -145,9 +146,9 @@ route.post("/visit", async (ctx, next) => {
             "<br>방문시간 : " +
             visitTime +
             '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/visitList.php">방문예약 바로가기</a></h2>',
-		result[0].email
+    result[0].email
     );
-	*/
+  */
 
   ctx.body = {
     result: "success",
@@ -188,18 +189,18 @@ route.post("/request", async (ctx, next) => {
     sendEmail(
       "[Cargo] 1:1문의글이 등록되었습니다.",
       '<h2 style="font-weight:400;">이름 : ' +
-        name +
-        "<br>연락처 : " +
-        phone +
-        "<br>문의지점 : " +
-        results[0].branchName +
-        "<br>스토리지 사이즈 : " +
-        storageSize +
-        "<br>문의내용 : " +
-        subject +
-        "<br>알게 된 경로 : " +
-        route +
-        '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
+      name +
+      "<br>연락처 : " +
+      phone +
+      "<br>문의지점 : " +
+      results[0].branchName +
+      "<br>스토리지 사이즈 : " +
+      storageSize +
+      "<br>문의내용 : " +
+      subject +
+      "<br>알게 된 경로 : " +
+      route +
+      '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
     );
 
     /*
@@ -218,21 +219,21 @@ route.post("/request", async (ctx, next) => {
                 "<br>알게 된 경로 : " +
                 route +
                 '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>',
-			result[0].email
+      result[0].email
         );
-		*/
+    */
   } else {
     sendEmail(
       "[Cargo] 1:1문의글이 등록되었습니다.",
       '<h2 style="font-weight:400;">이름 : ' +
-        name +
-        "<br>연락처 : " +
-        phone +
-        "<br>문의내용 : " +
-        subject +
-        "<br>알게 된 경로 : " +
-        route +
-        '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
+      name +
+      "<br>연락처 : " +
+      phone +
+      "<br>문의내용 : " +
+      subject +
+      "<br>알게 된 경로 : " +
+      route +
+      '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>'
     );
 
     /*
@@ -247,9 +248,9 @@ route.post("/request", async (ctx, next) => {
                 "<br>알게 된 경로 : " +
                 route +
                 '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/requestList.php">1:1문의 바로가기</a></h2>',
-			result[0].email
+      result[0].email
         );
-		*/
+    */
   }
 
   ctx.body = {
@@ -280,14 +281,14 @@ route.post("/franchise", async (ctx, next) => {
   sendEmail(
     "[Cargo] 가맹 문의글이 등록되었습니다.",
     '<h2 style="font-weight:400;">이름 : ' +
-      name +
-      "<br>이메일 : " +
-      email +
-      "<br>연락처 : " +
-      phone +
-      "<br>문의내용 : " +
-      description +
-      '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/franchiseList.php">가맹문의 바로가기</a></h2>'
+    name +
+    "<br>이메일 : " +
+    email +
+    "<br>연락처 : " +
+    phone +
+    "<br>문의내용 : " +
+    description +
+    '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/franchiseList.php">가맹문의 바로가기</a></h2>'
   );
 
   ctx.body = {
@@ -315,11 +316,12 @@ route.post("/event", async (ctx, next) => {
   });
 
   var branches = {
-    100: "인천 부평점",
-    101: "서울 군자점",
-    102: "부천 상동점",
+    100: "인천 부평역점",
+    101: "서울 군자역점",
+    102: "부천 상동역점",
     103: "안양 명학점",
-    104: "인천 갈산점",
+    104: "인천 갈산역점",
+    105: "파주 운정역점",
   };
 
   const [results, metadata] = await sequelize.query(
@@ -332,18 +334,18 @@ route.post("/event", async (ctx, next) => {
   sendEmail(
     "[Cargo] 이벤트 참여글이 등록되었습니다.",
     '<h2 style="font-weight:400;">이름 : ' +
-      name +
-      "<br>이메일 : " +
-      email +
-      "<br>연락처 : " +
-      phone +
-      "<br>지점 : " +
-      branches[branchIdx] +
-      "<br>이벤트 종류 : " +
-      promoIdx +
-      "<br>알게된 경로 : " +
-      route +
-      '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/promoList.php">이벤트 바로가기</a></h2>'
+    name +
+    "<br>이메일 : " +
+    email +
+    "<br>연락처 : " +
+    phone +
+    "<br>지점 : " +
+    branches[branchIdx] +
+    "<br>이벤트 종류 : " +
+    promoIdx +
+    "<br>알게된 경로 : " +
+    route +
+    '<br><a style="font-size:20px;color:blue;" href="http://test.sugarmanwork.com/admin/cargo/promoList.php">이벤트 바로가기</a></h2>'
   );
 
   ctx.body = {
@@ -384,20 +386,20 @@ route.post("/package", async (ctx, next) => {
   sendEmail(
     "[Cargo] 택배 문의글이 등록되었습니다.",
     '<h2 style="font-weight:400;">이름 : ' +
-      name +
-      "<br>이메일 : " +
-      email +
-      "<br>연락처 : " +
-      phone +
-      "<br>지역 : " +
-      area +
-      "<br>회사명 : " +
-      company +
-      "<br>플랫폼 : " +
-      platform +
-      "<br>월 택배 건수 : " +
-      delivery_count +
-      "</h2>"
+    name +
+    "<br>이메일 : " +
+    email +
+    "<br>연락처 : " +
+    phone +
+    "<br>지역 : " +
+    area +
+    "<br>회사명 : " +
+    company +
+    "<br>플랫폼 : " +
+    platform +
+    "<br>월 택배 건수 : " +
+    delivery_count +
+    "</h2>"
   );
 
   ctx.body = {
